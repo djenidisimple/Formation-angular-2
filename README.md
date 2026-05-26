@@ -59,7 +59,7 @@ cd projet/task-manager
 npm install
 
 # Démarrer le serveur de développement
-npm start
+ng serve
 ```
 
 Ouvrir [http://localhost:4200](http://localhost:4200).
@@ -201,10 +201,7 @@ Dans `app.routes.ts` :
 ## 📜 Commandes utiles
 
 ```bash
-npm start          # Démarrer le serveur de développement (port 4200)
-npm run build      # Build de production
-npm run watch      # Build en mode développement (watch)
-npm test           # Lancer les tests (si configurés)
+ng serve       
 ```
 
 ---
