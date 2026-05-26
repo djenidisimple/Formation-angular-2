@@ -49,7 +49,7 @@ Application web de gestion de tâches développée avec **Angular 21** dans le c
 
 ```bash
 # Cloner le dépôt
-git clone <url-du-depot>
+git clone https://github.com/djenidisimple/Formation-angular-2.git
 cd Formation-angular-2
 
 # Accéder au projet Angular
