@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  angular-formation:
+    build: .
+    container_name: formation-angular-l3
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./projet:/app
+    stdin_open: true
+    tty: true
+    command: sh

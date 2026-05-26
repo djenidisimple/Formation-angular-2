@@ -1,0 +1,81 @@
+<div class="board-wrapper">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      Task<span>Manager</span>
+    </div>
+    <div class="navbar-user">
+      <span>👤 {{ currentUser()?.username }}</span>
+      <button class="btn-logout" (click)="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <h2>Mon tableau</h2>
+    <button class="btn-add" (click)="showForm = !showForm">
+      {{ showForm ? '✕ Fermer' : '+ Nouvelle tâche' }}
+    </button>
+  </div>
+
+  <!-- Formulaire ajout (toggle) -->
+  @if (showForm) {
+    <div class="form-wrapper">
+      <app-task-form (taskCreated)="showForm = false" />
+    </div>
+  }
+
+  <!-- Colonnes Trello -->
+  <div class="board-columns">
+
+    <!-- TODO -->
+    <div class="column column-todo">
+      <div class="column-header">
+        <span class="column-title">À faire</span>
+        <span class="column-count">{{ todoTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of todoTasks(); track task.id) {
+          <app-task-card [task]="task" />
+        }
+        @if (todoTasks().length === 0) {
+          <p class="empty">Aucune tâche</p>
+        }
+      </div>
+    </div>
+
+    <!-- IN PROGRESS -->
+    <div class="column column-progress">
+      <div class="column-header">
+        <span class="column-title">En cours</span>
+        <span class="column-count">{{ inProgressTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of inProgressTasks(); track task.id) {
+          <app-task-card [task]="task" />
+        }
+        @if (inProgressTasks().length === 0) {
+          <p class="empty">Aucune tâche</p>
+        }
+      </div>
+    </div>
+
+    <!-- DONE -->
+    <div class="column column-done">
+      <div class="column-header">
+        <span class="column-title">Terminé</span>
+        <span class="column-count">{{ doneTasks().length }}</span>
+      </div>
+      <div class="column-body">
+        @for (task of doneTasks(); track task.id) {
+          <app-task-card [task]="task" />
+        }
+        @if (doneTasks().length === 0) {
+          <p class="empty">Aucune tâche</p>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

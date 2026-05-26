@@ -1,0 +1,83 @@
+<div class="register-wrapper">
+  <div class="register-card">
+
+    <div class="register-header">
+      <h1>Task<span>Manager</span></h1>
+      <p>Créez votre compte gratuitement</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label for="username">Nom d'utilisateur</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Jean Dupont"
+        />
+        @if (form.get('username')?.invalid && form.get('username')?.touched) {
+          <span class="error">Minimum 3 caractères</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="vous@exemple.com"
+        />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="error">Email invalide</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+        />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="error">Minimum 4 caractères</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirmer le mot de passe</label>
+        <input
+          id="confirm"
+          type="password"
+          formControlName="confirm"
+          placeholder="••••••••"
+        />
+        @if (form.get('confirm')?.invalid && form.get('confirm')?.touched) {
+          <span class="error">Champ obligatoire</span>
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <div class="alert alert-error">{{ errorMessage() }}</div>
+      }
+
+      @if (successMessage()) {
+        <div class="alert alert-success">{{ successMessage() }}</div>
+      }
+
+      <button type="submit" [disabled]="form.invalid">
+        Créer mon compte
+      </button>
+
+    </form>
+
+    <p class="switch">
+      Déjà un compte ?
+      <a routerLink="/login">Se connecter</a>
+    </p>
+
+  </div>
+</div>

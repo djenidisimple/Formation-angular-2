@@ -1,0 +1,48 @@
+<div class="card" [class]="'card-' + task().status">
+
+  <!-- En-tête carte -->
+  <div class="card-header">
+    <span class="card-badge" [class]="'badge-' + task().status">
+      {{ task().status === 'todo' ? 'À faire'
+       : task().status === 'in-progress' ? 'En cours'
+       : 'Terminé' }}
+    </span>
+    <button class="btn-delete" (click)="delete()" title="Supprimer">✕</button>
+  </div>
+
+  <!-- Contenu -->
+  <div class="card-body">
+    <h3 class="card-title">{{ task().title }}</h3>
+    @if (task().description) {
+      <p class="card-desc">{{ task().description }}</p>
+    }
+  </div>
+
+  <!-- Pied de carte -->
+  <div class="card-footer">
+    <span class="card-date">{{ formatDate(task().createdAt) }}</span>
+
+    <!-- Actions selon le statut actuel -->
+    <div class="card-actions">
+      @if (task().status === 'todo') {
+        <button class="btn-action btn-progress" (click)="moveToInProgress()">
+          → En cours
+        </button>
+      }
+      @if (task().status === 'in-progress') {
+        <button class="btn-action btn-back" (click)="moveToTodo()">
+          ← Retour
+        </button>
+        <button class="btn-action btn-done" (click)="moveToDone()">
+          ✓ Terminer
+        </button>
+      }
+      @if (task().status === 'done') {
+        <button class="btn-action btn-back" (click)="moveToTodo()">
+          ↺ Rouvrir
+        </button>
+      }
+    </div>
+  </div>
+
+</div>

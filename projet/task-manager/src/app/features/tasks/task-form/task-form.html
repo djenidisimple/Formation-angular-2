@@ -1,0 +1,38 @@
+<div class="task-form">
+
+  <h3 class="form-title">Nouvelle tâche</h3>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="field">
+      <label for="title">Titre <span class="required">*</span></label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        placeholder="Ex : Créer la maquette..."
+      />
+      @if (form.get('title')?.invalid && form.get('title')?.touched) {
+        <span class="error">Minimum 3 caractères</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="description">Description <span class="optional">(optionnel)</span></label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Décrivez la tâche..."
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="form.invalid" class="btn-submit">
+        Ajouter la tâche
+      </button>
+    </div>
+
+  </form>
+
+</div>

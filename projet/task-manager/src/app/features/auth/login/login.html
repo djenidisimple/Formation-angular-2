@@ -1,0 +1,53 @@
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <div class="login-header">
+      <h1>Task<span>Manager</span></h1>
+      <p>Connectez-vous pour accéder à vos tâches</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="vous@exemple.com"
+        />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="error">Email invalide</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+        />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="error">Minimum 4 caractères</span>
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <div class="alert">{{ errorMessage() }}</div>
+      }
+
+      <button type="submit" [disabled]="form.invalid">
+        Se connecter
+      </button>
+
+    </form>
+
+    <p class="switch">
+      Pas encore de compte ?
+      <a routerLink="/register">S'inscrire</a>
+    </p>
+
+  </div>
+</div>
